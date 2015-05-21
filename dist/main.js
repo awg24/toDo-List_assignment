@@ -1,17 +1,33 @@
-var inputItem = document.getElementById("type-message");
+var form = document.getElementById("form-id");
+var input = document.getElementById("type-message");
 var section = document.getElementById("the-list");
-var button = document.getElementById("submit");
 var listArray = [];
 
-//inputItem.addEventListener("keyup", render);
-button.addEventListener("click", render);
+form.style.marginBottom = "10px";
+
+form.addEventListener("submit", render);
+input.addEventListener("focus", render);
+window.addEventListener("unload", save);
+
 
 function render(event){
+	event.preventDefault();
 	console.log(event);
-	//if(event.keyCode === 13){
-		section.innerHTML = "";
-		listArray.push(inputItem.value);
-		inputItem.value = "";
-		section.innerHTML += "<div>"+listArray.join("</div><div>")+"</div>";
-	//}
+	section.innerHTML = "";
+	listArray.push(input.value);
+	input.value = "";
+	section.innerHTML += "<div>"+listArray.join("</div><div>")+"</div>";
+	input.focus();
+	return false;
+}
+
+function save(){
+	localStorage.setItem("toDo",JSON.stringify(listArray));
+}
+
+
+if(localStorage.getItem("toDo") !== ""){
+	var restoredSession = JSON.parse(localStorage.getItem("toDo"));
+	listArray = restoredSession;
+	section.innerHTML += "<div>"+restoredSession.join("</div><div>")+"</div>";
 }
