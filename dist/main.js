@@ -1,6 +1,7 @@
 var form = document.getElementById("form-id");
 var input = document.getElementById("type-message");
 var section = document.getElementById("the-list");
+var buttonDelete = document.getElementById("delete");
 var listArray = [];
 
 form.style.marginBottom = "10px";
@@ -8,6 +9,7 @@ form.style.marginBottom = "10px";
 form.addEventListener("submit", render);
 input.addEventListener("focus", render);
 window.addEventListener("unload", save);
+buttonDelete.addEventListener("click",deleteAll);
 
 
 function render(event){
@@ -23,6 +25,15 @@ function render(event){
 
 function save(){
 	localStorage.setItem("toDo",JSON.stringify(listArray));
+}
+
+function deleteAll(){
+	var confirmDelete = confirm("Are you sure you want to delete the entire list?");
+	if(confirmDelete){
+		localStorage.removeItem("toDo");
+		listArray = [];
+		section.innerHTML = "";
+	}
 }
 
 
