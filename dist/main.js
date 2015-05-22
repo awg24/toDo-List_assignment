@@ -11,7 +11,6 @@ input.addEventListener("focus", render);
 window.addEventListener("unload", save);
 buttonDelete.addEventListener("click",deleteAll);
 
-
 function render(event){
 	event.preventDefault();
 	console.log(event);
@@ -36,9 +35,8 @@ function deleteAll(){
 	}
 }
 
-
-if(localStorage.getItem("toDo") !== null){
-	var restoredSession = JSON.parse(localStorage.getItem("toDo"));
+var restoredSession = JSON.parse(localStorage.getItem("toDo"));
+if(restoredSession !== null){
 	listArray = restoredSession;
 	section.innerHTML += "<div>"+restoredSession.join("</div><div>")+"</div>";
 }
