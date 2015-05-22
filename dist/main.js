@@ -37,7 +37,7 @@ function deleteAll(){
 }
 
 
-if(localStorage.getItem("toDo") !== ""){
+if(localStorage.getItem("toDo") !== null){
 	var restoredSession = JSON.parse(localStorage.getItem("toDo"));
 	listArray = restoredSession;
 	section.innerHTML += "<div>"+restoredSession.join("</div><div>")+"</div>";
